@@ -63,7 +63,7 @@ def load_conversation():
 def prompt_question():
     question = SESSION.prompt().strip()
     if question.startswith("/"):
-        handle_command(question[1:])
+        handle_command(question[1:].strip().lower())
         return prompt_question()
     if not question:
         return prompt_question()
