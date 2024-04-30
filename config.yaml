@@ -1,20 +1,19 @@
-system_prompt: "You are a helpful assistant that returns short answers to questions. Do NOT use markdown. Keep your responses under 500 characters."
+system_prompt: "You are a helpful assistant that returns short answers to questions. Do NOT use markdown. Keep your responses under 500 characters unless it's necessary to provide a complete answer."
 conversation_file: "conversation.json"
 conversation_expiry_hours: 1
 default_provider: "openai"
 debug: false
 
-api_keys:
-    openai: ""
-    anthropic: ""
-
-model_map:
+providers_map:
     anthropic:
         model: "claude-2.1"
+        api_key: ""
         base_url: ""
     openai:
         model: "gpt-4-0125-preview"
+        api_key: ""
         base_url: ""
     ollama:
-        model: "mistral"
+        model: "llama3"
+        api_key: ""
         base_url: "http://localhost:11434"

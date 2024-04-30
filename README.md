@@ -1,53 +1,64 @@
 # cli-gpt-chat
 
-This script enables CLI interaction with language models through LiteLLM. It supports conversational queries and maintains a history for context-aware responses.
+This script enables CLI interaction with language models through LiteLLM. It supports multiple language model providers like OpenAI, Anthropic, and Ollama.
 
 ### Requirements
 
 -   An API key for language model providers like [OpenAI](https://platform.openai.com/account/api-keys) or [Anthropic](https://console.anthropic.com/settings/keys), set in `config.yaml` or as respective environment variables (e.g., `OPENAI_API_KEY`).
--   If using [Ollama](https://ollama.ai) models, ensure they are installed and configured as specified under `model_map` in `config.yaml`.
+-   If using [Ollama](https://ollama.ai) ensure it is running, the model is available, and the base URL is set correctly in `config.yaml`.
 
-### Setup
+### Automatic Setup
 
-1. Clone the repo: `git clone git@github.com:pahar0/cli-gpt-chat.git`.
-2. Install dependencies: `pip install -r path/to/repo/cli-gpt-chat/requirements.txt`.
-3. Make `gpt.py` executable: `chmod +x path/to/repo/cli-gpt-chat/gpt.py`.
-4. Create a symlink: `sudo ln -sf path/to/repo/cli-gpt-chat/gpt.py /usr/local/bin/gpt`.
-5. Refresh environment: `source ~/.bashrc`.
-6. Use the command: `gpt <arguments>` anywhere in your terminal.
+Run the following command in your terminal:
 
-## Configuration
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/pahar0/cli-gpt-chat/main/install.sh)"
+```
 
--   `api_keys`: Specify your API keys for providers like OpenAI and Anthropic. If not directly provided, set them as environment variables.
+### Manual installation
+
+```bash
+# Clone the repo
+git clone git@github.com:pahar0/cli-gpt-chat.git
+# Navigate to the project directory
+cd cli-gpt-chat
+# Install dependencies
+pip install -r requirements.txt
+# Make gpt.py executable
+chmod +x gpt.py
+# Create a symlink
+sudo ln -sf $(pwd)/gpt.py /usr/local/bin/gpt
+# Refresh environment
+source ~/.bashrc
+```
+
+## Configuration (config.yaml)
+
+-   `system_prompt`: Define the initial system message to start conversations.
 -   `conversation_file`: Designate a file to save conversation history, aiding in context awareness.
 -   `conversation_expiry_hours`: Set the duration after which the conversation history expires and resets.
--   `system_prompt`: Define the initial system message to start conversations.
--   `model_map`: Map provider names to their respective models and base URLs for API requests.
 -   `default_provider`: Set your default language model provider.
 -   `debug`: Enable or disable debug mode for additional log information.
+-   `providers_map`: Map provider names to their respective models, API keys and base URLs for API requests.
 
 ## Usage
 
-Use the `gpt` command followed by your question to activate the chat assistant. The `-p` or `--provider` flag selects the provider (default: OpenAI), and `-d` or `--delete` clears conversational history.
+Run the `gpt` command in your terminal. You can interact with the script using the following commands:
 
-Examples:
+-   `/prompt`: Show or change the prompt.
+-   `/conversation`: Show the current conversation.
+-   `/provider`: Show or change the provider and model.
+-   `/delete`: Delete the current conversation.
+-   `/clear`: Clear the terminal screen.
+-   `/debug`: Toggle debug mode.
+-   `/bye`: Exit the program. Same as Ctrl+C.
 
-```bash
-gpt -p ollama What is the theory of relativity?
-```
+These settings will apply only to the current session. To change the default settings, edit the `config.yaml` file.
 
-```bash
-gpt -d Who discovered penicillin?
-```
+## Providers
 
-```bash
-gpt What is the capital of Italy?
-```
-
-### Flags
-
--   `-p` or `--provider`: Choose the provider. (default `openai`).
--   `-d` or `--delete`: Clear conversation history.
+You can add any of the LiteLLM providers to the `providers_map` in the `config.yaml` file.
+You can find a list of available providers [here](https://litellm.vercel.app/docs/providers).
 
 ## Troubleshooting
 
