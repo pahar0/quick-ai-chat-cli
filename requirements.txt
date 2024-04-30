@@ -1,2 +1,3 @@
 litellm
 pyyaml
+prompt_toolkit
