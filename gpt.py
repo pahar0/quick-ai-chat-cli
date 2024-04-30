@@ -105,7 +105,7 @@ def handle_command(command):
             os.system("clear")
         case "?":
             print_help()
-        case "exit":
+        case "bye":
             exit()
         case "debug":
             cfg["debug"] = not cfg["debug"]
